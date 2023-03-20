@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ZHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EmployeeTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FoodTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AssignedEmp" Type="int" />
+          <Property Name="FoodType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RequestedRes" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NGOTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ResturentTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_FoodTable_EmployeeTable">
+          <End Role="EmployeeTable" Type="Self.EmployeeTable" Multiplicity="0..1" />
+          <End Role="FoodTable" Type="Self.FoodTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FoodTable">
+              <PropertyRef Name="AssignedEmp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FoodTable_ResturentTable">
+          <End Role="ResturentTable" Type="Self.ResturentTable" Multiplicity="1" />
+          <End Role="FoodTable" Type="Self.FoodTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResturentTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FoodTable">
+              <PropertyRef Name="RequestedRes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ZHModelStoreContainer">
+          <EntitySet Name="EmployeeTable" EntityType="Self.EmployeeTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FoodTable" EntityType="Self.FoodTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NGOTable" EntityType="Self.NGOTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResturentTable" EntityType="Self.ResturentTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FoodTable_EmployeeTable" Association="Self.FK_FoodTable_EmployeeTable">
+            <End Role="EmployeeTable" EntitySet="EmployeeTable" />
+            <End Role="FoodTable" EntitySet="FoodTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FoodTable_ResturentTable" Association="Self.FK_FoodTable_ResturentTable">
+            <End Role="ResturentTable" EntitySet="ResturentTable" />
+            <End Role="FoodTable" EntitySet="FoodTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ZHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EmployeeTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FoodTables" Relationship="ZHModel.FK_FoodTable_EmployeeTable" FromRole="EmployeeTable" ToRole="FoodTable" />
+        </EntityType>
+        <EntityType Name="FoodTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AssignedEmp" Type="Int32" />
+          <Property Name="FoodType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Quantity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RequestedRes" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EmployeeTable" Relationship="ZHModel.FK_FoodTable_EmployeeTable" FromRole="FoodTable" ToRole="EmployeeTable" />
+          <NavigationProperty Name="ResturentTable" Relationship="ZHModel.FK_FoodTable_ResturentTable" FromRole="FoodTable" ToRole="ResturentTable" />
+        </EntityType>
+        <EntityType Name="NGOTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ResturentTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FoodTables" Relationship="ZHModel.FK_FoodTable_ResturentTable" FromRole="ResturentTable" ToRole="FoodTable" />
+        </EntityType>
+        <EntityContainer Name="ZHEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EmployeeTables" EntityType="Self.EmployeeTable" />
+          <EntitySet Name="FoodTables" EntityType="Self.FoodTable" />
+          <EntitySet Name="NGOTables" EntityType="Self.NGOTable" />
+          <EntitySet Name="ResturentTables" EntityType="Self.ResturentTable" />
+          <AssociationSet Name="FK_FoodTable_EmployeeTable" Association="ZHModel.FK_FoodTable_EmployeeTable">
+            <End Role="EmployeeTable" EntitySet="EmployeeTables" />
+            <End Role="FoodTable" EntitySet="FoodTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FoodTable_ResturentTable" Association="ZHModel.FK_FoodTable_ResturentTable">
+            <End Role="ResturentTable" EntitySet="ResturentTables" />
+            <End Role="FoodTable" EntitySet="FoodTables" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_FoodTable_EmployeeTable">
+          <End Type="ZHModel.EmployeeTable" Role="EmployeeTable" Multiplicity="0..1" />
+          <End Type="ZHModel.FoodTable" Role="FoodTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FoodTable">
+              <PropertyRef Name="AssignedEmp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FoodTable_ResturentTable">
+          <End Type="ZHModel.ResturentTable" Role="ResturentTable" Multiplicity="1" />
+          <End Type="ZHModel.FoodTable" Role="FoodTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResturentTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FoodTable">
+              <PropertyRef Name="RequestedRes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ZHModelStoreContainer" CdmEntityContainer="ZHEntities">
+          <EntitySetMapping Name="EmployeeTables">
+            <EntityTypeMapping TypeName="ZHModel.EmployeeTable">
+              <MappingFragment StoreEntitySet="EmployeeTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FoodTables">
+            <EntityTypeMapping TypeName="ZHModel.FoodTable">
+              <MappingFragment StoreEntitySet="FoodTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AssignedEmp" ColumnName="AssignedEmp" />
+                <ScalarProperty Name="FoodType" ColumnName="FoodType" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="RequestedRes" ColumnName="RequestedRes" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NGOTables">
+            <EntityTypeMapping TypeName="ZHModel.NGOTable">
+              <MappingFragment StoreEntitySet="NGOTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResturentTables">
+            <EntityTypeMapping TypeName="ZHModel.ResturentTable">
+              <MappingFragment StoreEntitySet="ResturentTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ZHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="EmployeeTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FoodTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AssignedEmp" Type="int" />
+    <Property Name="FoodType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Quantity" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RequestedRes" Type="int" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NGOTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ResturentTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_FoodTable_EmployeeTable">
+    <End Role="EmployeeTable" Type="Self.EmployeeTable" Multiplicity="0..1" />
+    <End Role="FoodTable" Type="Self.FoodTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeeTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FoodTable">
+        <PropertyRef Name="AssignedEmp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FoodTable_ResturentTable">
+    <End Role="ResturentTable" Type="Self.ResturentTable" Multiplicity="1" />
+    <End Role="FoodTable" Type="Self.FoodTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResturentTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FoodTable">
+        <PropertyRef Name="RequestedRes" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ZHModelStoreContainer">
+    <EntitySet Name="EmployeeTable" EntityType="Self.EmployeeTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FoodTable" EntityType="Self.FoodTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NGOTable" EntityType="Self.NGOTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResturentTable" EntityType="Self.ResturentTable" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_FoodTable_EmployeeTable" Association="Self.FK_FoodTable_EmployeeTable">
+      <End Role="EmployeeTable" EntitySet="EmployeeTable" />
+      <End Role="FoodTable" EntitySet="FoodTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FoodTable_ResturentTable" Association="Self.FK_FoodTable_ResturentTable">
+      <End Role="ResturentTable" EntitySet="ResturentTable" />
+      <End Role="FoodTable" EntitySet="FoodTable" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

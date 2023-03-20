@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d30ca8c92acd4c71b5a2c40a6faac33f" Name="Diagram1" ZoomLevel="125">
+        <EntityTypeShape EntityType="ZHModel.EmployeeTable" Width="1.5" PointX="9.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZHModel.FoodTable" Width="1.5" PointX="6.375" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZHModel.NGOTable" Width="1.5" PointX="6.375" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ZHModel.ResturentTable" Width="1.5" PointX="3.5" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="ZHModel.FK_FoodTable_EmployeeTable" />
+        <AssociationConnector Association="ZHModel.FK_FoodTable_ResturentTable" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

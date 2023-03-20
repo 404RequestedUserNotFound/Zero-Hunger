@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2 style="color:white">NGO Dashboard</h2>
+
+@Styles.Render("~/Content/Login.css")
+@Styles.Render("~/Content/Dashboard.css")
+
+<body>
+    <section>
+        <div class="layout">
+
+            <div class="btn-group">
+                <a href="/Employee/EmployeeDetails" class="btn btn-primary">Manage Employees</a>
+                <a href="/Resturent/ManageResturent" class="btn btn-success">Manage Restaurants</a>
+                <a href="/NGO/CollectRequest" class="btn btn-warning">Collection Requests</a>
+                <a href="/NGO/Logout" class="btn btn-danger">Logout</a>
+            </div>
+
+         </div>
+    </section>
+</body>

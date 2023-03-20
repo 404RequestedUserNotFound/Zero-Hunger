@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ZH.Models.ZHEF.FoodTable>
+
+@{
+    ViewBag.Title = "Request Collection";
+}
+
+@Styles.Render("~/Content/Login.css")
+@Styles.Render("~/Content/List.css")
+
+
+<body>
+    <section>
+        <div class="layout">
+
+            <h2 style="color:black">Request Collection</h2>
+
+            <p>
+                <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("CreateRequest", "Resturent")'">Create New Request</button>
+            </p>
+
+
+            <p>
+                @TempData["message"]
+            </p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FoodType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FoodType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Delete", "Resturent", new { id = item.Id })'">Delete Request</button>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+
+
+            <div class="btn-group">
+                <a href="/Resturent/Dashboard" class="btn btn-warning">Back to Dashboard</a>
+            </div>
+        
+        </div>
+    </section>
+</body>
+
+
+
+

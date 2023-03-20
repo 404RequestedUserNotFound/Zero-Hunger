@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ZH.Models.ZHEF.FoodTable>
+@{
+    ViewBag.Title = "CollectRequest";
+}
+
+<h2 style="color:white">Request Collection</h2>
+
+@Styles.Render("~/Content/Login.css")
+@Styles.Render("~/Content/List.css")
+
+
+
+<body>
+    <section>
+        <div class="layout">
+
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FoodType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RequestedRes)
+                    </th>
+                    <th>
+                        Restaurant Address
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FoodType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+
+                        <td>
+                            @item.ResturentTable.Name
+                        </td>
+                        <td>
+                            @item.ResturentTable.Location
+                        </td>
+
+
+                        @if (item.Status == "Pending")
+                        {
+                            <td>
+                                <button type="button" class="btn btn-warning" onclick="location.href='@Url.Action("Delete", "Employee", new { id = item.Id })'">Accept Pick Request</button>
+                            </td>
+                        }
+                    </tr>
+                }
+            </table>
+            <br />
+
+            <div class="btn-group">
+                <a href="/Employee/Dashboard" class="btn btn-warning">Back to Dashboard</a>
+            </div>
+        
+        </div>
+    </section>
+</body>
+
+

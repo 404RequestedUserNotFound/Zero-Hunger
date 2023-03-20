@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2 style="color:white">Employee Dashboard</h2>
+
+@Styles.Render("~/Content/Login.css")
+@Styles.Render("~/Content/Dashboard.css")
+
+<body>
+    <section>
+        <div class="layout">
+
+            <div class="btn-group">
+                <a href="/Employee/CollectRequest" class="btn btn-primary">Assigned Collection</a>
+                <a href="/Employee/Logout" class="btn btn-danger">Logout</a>
+
+            </div>
+
+         </div>
+
+    </section>
+</body>

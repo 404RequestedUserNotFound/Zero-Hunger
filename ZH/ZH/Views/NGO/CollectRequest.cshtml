@@ -1,0 +1,78 @@
+﻿@model IEnumerable<ZH.Models.ZHEF.FoodTable>
+@{
+    ViewBag.Title = "Request Collection";
+}
+
+<h2 style="color:white">Request Collection</h2>
+
+@Styles.Render("~/Content/Login.css")
+@Styles.Render("~/Content/List.css")
+
+
+
+
+<body>
+    <section>
+        <div class="layout">
+
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FoodType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AssignedEmp)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RequestedRes)
+                    </th>
+                    <th>
+                        Restuarant Location
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FoodType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeTable.Name)
+                        </td>
+                        <td>
+                            @item.ResturentTable.Name
+                        </td>
+                        <td>
+                            @item.ResturentTable.Location
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-warning" onclick="location.href='@Url.Action("Employee", "NGO", new { id = item.Id })'">Assign Employee</button>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+            </div>
+
+        <div class="btn-group">
+            <a href="/NGO/Dashboard" class="btn btn-warning">Back to Dashboard</a>
+        </div>
+
+</section>
+</body>
+
+

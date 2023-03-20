@@ -1,0 +1,64 @@
+﻿@model ZH.Models.ZHEF.FoodTable
+
+@{
+    ViewBag.Title = "CreateRequest";
+}
+
+
+<body>
+    <form>
+
+         @Styles.Render("~/Content/LoginCRR.css")
+
+         @using (Html.BeginForm())
+         {
+            @Html.AntiForgeryToken()
+
+          <div class="form-horizontal">
+            <h2>Create Pick Request</h2>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FoodType, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FoodType, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FoodType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+                <br />
+                <br />
+                <div>
+                    <a href="/Resturent/RequestCollection" class="btn btn-warning">Back to Request List</a>
+                </div>
+            </div>
+        </div>
+        }
+    </form>
+</body>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ZHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="EmployeeTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="FoodTables" Relationship="ZHModel.FK_FoodTable_EmployeeTable" FromRole="EmployeeTable" ToRole="FoodTable" />
+  </EntityType>
+  <EntityType Name="FoodTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AssignedEmp" Type="Int32" />
+    <Property Name="FoodType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Quantity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RequestedRes" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="EmployeeTable" Relationship="ZHModel.FK_FoodTable_EmployeeTable" FromRole="FoodTable" ToRole="EmployeeTable" />
+    <NavigationProperty Name="ResturentTable" Relationship="ZHModel.FK_FoodTable_ResturentTable" FromRole="FoodTable" ToRole="ResturentTable" />
+  </EntityType>
+  <EntityType Name="NGOTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ResturentTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="FoodTables" Relationship="ZHModel.FK_FoodTable_ResturentTable" FromRole="ResturentTable" ToRole="FoodTable" />
+  </EntityType>
+  <EntityContainer Name="ZHEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="EmployeeTables" EntityType="Self.EmployeeTable" />
+    <EntitySet Name="FoodTables" EntityType="Self.FoodTable" />
+    <EntitySet Name="NGOTables" EntityType="Self.NGOTable" />
+    <EntitySet Name="ResturentTables" EntityType="Self.ResturentTable" />
+    <AssociationSet Name="FK_FoodTable_EmployeeTable" Association="ZHModel.FK_FoodTable_EmployeeTable">
+      <End Role="EmployeeTable" EntitySet="EmployeeTables" />
+      <End Role="FoodTable" EntitySet="FoodTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FoodTable_ResturentTable" Association="ZHModel.FK_FoodTable_ResturentTable">
+      <End Role="ResturentTable" EntitySet="ResturentTables" />
+      <End Role="FoodTable" EntitySet="FoodTables" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_FoodTable_EmployeeTable">
+    <End Type="ZHModel.EmployeeTable" Role="EmployeeTable" Multiplicity="0..1" />
+    <End Type="ZHModel.FoodTable" Role="FoodTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeeTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FoodTable">
+        <PropertyRef Name="AssignedEmp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FoodTable_ResturentTable">
+    <End Type="ZHModel.ResturentTable" Role="ResturentTable" Multiplicity="1" />
+    <End Type="ZHModel.FoodTable" Role="FoodTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResturentTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FoodTable">
+        <PropertyRef Name="RequestedRes" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
